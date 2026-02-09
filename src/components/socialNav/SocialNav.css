@@ -1,0 +1,57 @@
+.social-nav {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1000;
+  direction: ltr !important;
+}
+
+.social-nav a {
+  color: var(--color-gold);
+  font-size: 30px;
+  transition: color 0.3s ease;
+}
+
+.social-nav a:hover {
+  color: var(--color-primary);
+}
+
+/* SocialNav.css */
+@media (max-width: 768px) {
+  .social-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
+    margin-top: 25px;
+    padding: 15px 15px;
+    position: fixed;
+    gap: 20px;
+    background: rgba(21, 69, 54, 0.5);
+    z-index: 10;
+    top: auto;
+    bottom: 1px;
+    left: 1%;
+    right: 1%;
+    font-size: 30px;
+    font-weight: 700;
+    transform: translateX(0);
+    border-radius: 4rem;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+
+  .social-nav a {
+    font-size: 8rem;
+
+  }
+
+}
+
+.social-nav a {
+  font-size: 24px;
+}

@@ -1,0 +1,185 @@
+/* الحاوية الرئيسية للقسم */
+.solar-importance {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  min-height: 80vh;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+/* قسم الصورة على اليسار */
+.solar-image {
+  flex: 1;
+  /* يأخذ نصف المساحة */
+  position: relative;
+  z-index: 1;
+}
+
+.solar-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* لضمان ملء الصورة للمساحة دون تشويه */
+}
+
+/* طبقة بيضاء شفافة متدرجة فوق الصورة (اختياري لتعزيز الشكل) */
+.solar-image::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, transparent 50%, white 100%);
+}
+
+/* قسم المحتوى على اليمين */
+.solar-content {
+  flex: 1.2;
+  /* مساحة أكبر قليلاً للمحتوى */
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+
+}
+
+.solar-content h2 {
+  color: var(--background-color);
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 30px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+/* الفقرة التعريفية */
+.solar-content .intro {
+  color: #444;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  max-width: 90%;
+}
+
+/* تنسيق كل ميزة (العنوان والوصف) */
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+/* تنسيق أيقونة الدائرة الخضراء */
+.feature .icon {
+  background-color: #2d7a4d;
+  color: white;
+  min-width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  flex-shrink: 0;
+  /* لمنع تقلص الدائرة */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* تنسيق نصوص الميزات */
+.feature h3 {
+  background-color: #d4a017;
+  /* اللون الذهبي للعنوان */
+  color: #000;
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  width: 100%;
+  /* لتمتد مثل الصورة */
+}
+
+.feature p {
+  margin: 0 auto;
+}
+
+
+/* جعل التصميم متوافق مع الموبايل */
+@media (max-width: 1024px) {
+  .solar-importance {
+    width: 90%;
+    margin: 10px auto;
+
+  }
+
+  .solar-image img {
+    width: 70%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .solar-content {
+    padding: 40px o;
+  }
+
+  .solar-content h2 {
+    font-size: 25px;
+  }
+
+  .feature h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: -20px;
+  }
+}
+
+.feature .icon {
+  right: -260px;
+  /* دفعها لليمين فوق الصورة في العربي */
+}
+
+
+
+
+/* لعكس الاتجاه في اللغة العربية */
+[dir="rtl"] .solar-importance {
+  font-family: var(--font-ar);
+  flex-direction: row;
+}
+[dir="rtl"] .solar-content{
+   flex: 1.2;
+  /* مساحة أكبر قليلاً للمحتوى */
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+}
+
+[dir="rtl"] .feature {
+  flex-direction: row;
+  /* لتبقى الأيقونة على اليمين في العربي */
+}
+
+[dir="rtl"] .solar-image::after {
+  left: 0;
+  /* عكس اتجاه التدرج ليتجه لليسار ويختفي عند المحتوى */
+  background: linear-gradient(to left, transparent 20%, white 100%);
+}
+
+[dir="rtl"] .feature .icon {
+  left: auto;
+  right:-300px;
+  /* دفعها لليمين فوق الصورة في العربي */
+}
+
+[dir="rtl"] .feature h3 {
+  margin-left: 0;
+  margin-right: -20px;
+  padding-left: 20px;
+}

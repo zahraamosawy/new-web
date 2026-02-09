@@ -1,0 +1,134 @@
+{
+  "home": "Home",
+  "about": "About",
+  "services": "Services",
+  "projects": "Projects",
+  "news": "news",
+  "contact": "Contact",
+
+  "aboutUs": {
+    "title": "About Us",
+    "paragraph1": "Future Generation for Information Technology was established with a clear vision to deliver reliable, high-efficiency solar energy solutions tailored to the Iraqi market. From the outset, the company focused on building strong technical expertise and delivering fully integrated services that cover the complete project lifecycle.",
+
+    "paragraph2": "Over two years, we have successfully executed more than 300 solar energy projects across residential, commercial, and industrial sectors in Baghdad and Babil. This growing portfolio reflects our commitment to quality, performance, and customer trust.",
+
+    "paragraph3": "Our operations are supported by trained technical teams, carefully selected equipment, and continuously evolving technical capabilities. Beyond system design and installation, we provide maintenance, technical support, and long-term performance assurance to ensure sustainable value for our clients.",
+
+    "paragraph4": "Building on our strong local presence, Future Generation is expanding its scope toward government and large-scale projects, while actively developing strategic partnerships to broaden our impact. Our mission is to contribute to a cleaner, more resilient energy future by reducing reliance on conventional power sources and promoting sustainable energy solutions across Iraq.",
+    "buttun": " More    >>>>"
+  },
+
+  "missionVision": {
+    "title": "Mission & Vision",
+    "missionTitle": "MISSION",
+    "visionTitle": "VISION",
+
+    "mission": [
+      "To deliver high-quality, fully integrated solar energy systems tailored to customer requirements.",
+      "To provide outstanding customer service and a seamless client experience.",
+      "To offer continuous technical support and reliable after-sales services.",
+      "To implement efficient solutions that help mitigate persistent electricity shortages.",
+      "To support environmental sustainability through the adoption of renewable energy.",
+      "To contribute to building a cleaner and more stable energy future for Iraq."
+    ],
+
+    "vision": [
+      "To become the leading provider of sustainable and efficient solar energy solutions in Iraq.",
+      "To enhance the quality of life for individuals and institutions through clean, stable, and practical electricity.",
+      "To offer a reliable alternative to traditional diesel generators.",
+      "To deliver fully integrated, high-quality solar systems that meet diverse customer needs.",
+      "To ensure exceptional customer service and continuous technical support.",
+      "To provide effective solutions that address the ongoing challenge of power outages.",
+      "To promote environmental sustainability and contribute to a clean-energy future."
+    ]
+  },
+
+  "solarImportance": {
+    "title": "WHY SOLAR ENERGY IS IMPORTANT?",
+    "intro": "Solar energy is increasingly becoming the preferred choice for homeowners and businesses due to its clear economic and environmental advantages. These benefits make solar power a key component in the transition toward sustainable energy solutions.",
+
+    "features": [
+      {
+        "title": "Environmentally Responsible",
+        "text": "Solar energy is a clean power source that reduces carbon emissions and minimizes environmental impact."
+      },
+      {
+        "title": "Reliable & Sustainable",
+        "text": "Powered by an abundant renewable resource, solar energy ensures long-term availability and dependable performance."
+      },
+      {
+        "title": "Cost-Effective",
+        "text": "A one-time system investment delivers long-term savings by reducing dependence on rising electricity costs."
+      },
+      {
+        "title": "Energy Independence",
+        "text": "Solar systems, especially when combined with battery storage, provide reliable power independent of unstable grids."
+      }
+    ]
+  },
+
+  "newsCenter": {
+    "titleRed": "NEWS",
+    "titleBlack": "CENTER",
+    "more": "MORE >>>",
+    "items": [
+      {
+        "id": "factory1",
+        "image": "news1",
+        "title": "How to accurately select photovoltaic modules?",
+        "desc": "With the widespread application of photovoltaic power generation, it has gradually entered the public eye and..."
+      },
+      {
+        "id": "factory2",
+        "image": "news2",
+        "title": "Transform the factory's empty roof into a power station",
+        "desc": "In today's increasingly tense energy situation, industrial and commercial enterprises have turned to using open roofs as..."
+      },
+      {
+        "id": "factory3",
+        "image": "news3",
+        "title": "Emerging markets and future development trends in the photovoltaic industry",
+        "desc": "The photovoltaic industry has always been highly anticipated, and with the continuous advancement of..."
+      },
+      {
+        "id": "factory4",
+        "image": "news4",
+        "title": "How to choose the tilt angle of a photovoltaic power station?",
+        "desc": "In today's era that emphasizes renewable energy, photovoltaic power generation has become the focus of..."
+      }
+    ]
+  }
+  ,
+  "milestones": {
+    "title": "Key Milestones",
+    "items": [
+      {
+        "date": "2024",
+
+        "text": "Established Future Generation for Information Technology & General Trading LLC, with a strategic focus on delivering solar energy solutions to the Iraqi market."
+      },
+      {
+        "date": "2025",
+        "text": "Successfully executed over 100 residential and commercial solar projects across Baghdad and Babil, strengthening our local market presence."
+      },
+      {
+        "date": "March 2025",
+        "text": "Signed an official partnership agreement with PowerSolid, becoming an authorized supplier of high-quality solar equipment."
+      },
+      {
+        "date": "June 2025",
+        "text": "Opened our main branch in Baghdad – Al-Sinaa Street, expanding service coverage and enhancing technical support capabilities."
+      },
+      {
+        "date": "July 2025",
+        "text": "Reached a major milestone with the completion of 150+ solar energy projects, supporting small and medium-scale installations."
+      },
+      {
+        "date": "2026",
+        "text": "Achieved a portfolio of over 300 completed solar projects, marking a significant step toward large-scale and government-sector expansion."
+      }
+    ]
+  }
+}
+
+

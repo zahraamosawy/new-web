@@ -1,0 +1,91 @@
+/* solar/src/index.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* ========== Colors ========== */
+  --color-primary: #174344;
+  --background-color: #208b5e;
+  --color-white: #ffffff;
+  --color-gold: #d5a800;
+  --color-beige: #b5ad9b;
+  --color-light-gray: #e4e3e1;
+  --color-dark: #333a4a;
+  --light-color: #f8f9fa;
+
+  /* ========== Fonts ========== */
+  --font-en: "Helvetica World", Arial, sans-serif;
+  --font-ar: "Madani Arabic", "Arial", sans-serif;
+}
+/* ========== Base Styles ========== */
+.container {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+body {
+  font-family: var(--font-en);
+  font-family: var(--font-ar);
+
+  background-color: var(--color-white);
+  color: var(--color-dark);
+  line-height: 1.5;
+}
+
+/* Support for Arabic font */
+body.lang-ar {
+  font-family: var(--font-ar);
+}
+
+html {
+  scroll-behavior: smooth;
+
+}
+::-webkit-scrollbar{
+    display: none;
+}
+
+
+/* ========== Layout ========== */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px; /* Height of the fixed header */
+}
+
+.main-content {
+  flex: 1;
+}
+
+/* ========== Typography ========== */
+h1, h2, h3, h4, h5, h6, p {
+  font-family: var(--font-ar);
+  color: var(--color-primary);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.lang-transition a.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    filter 0.4s ease;
+}
+
+.lang-transition a.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(3px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    filter 0.25s ease;
+}

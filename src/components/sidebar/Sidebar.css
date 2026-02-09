@@ -1,0 +1,21 @@
+.container-sidebar {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.sidebar {
+
+  width: 100%;
+  height: calc(100vh- 50px);
+  overflow: hidden;
+}
+
+.sidebar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

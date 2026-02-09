@@ -1,0 +1,49 @@
+.stats-section {
+  padding: 40px 5% 80px;
+  background: #fff;
+  direction: ltr !important;
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  text-align: center;
+}
+
+.stat-card h3 {
+  font-size: 42px;
+  font-weight: 800;
+  color: #d60000;
+  margin-bottom: 5px;
+}
+
+.stat-card h3 small {
+  font-size: 16px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #6d6b6b;
+  margin-left: 6px;
+}
+
+.stat-card p {
+  font-size: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  color: #000;
+}
+
+.stat-value {
+  display: inline-block;
+  min-width: 1.5ch; /* يحجز مساحة الرقم لكي لا تتحرك الكلمة بجانبه */
+  text-align: right;
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stats-container {
+    grid-template-columns: 1fr;
+
+  }
+}

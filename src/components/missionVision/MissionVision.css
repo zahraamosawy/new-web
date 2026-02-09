@@ -1,0 +1,76 @@
+.mission-vision {
+  background: #0f3f3f; /* أخضر داكن مثل التصميم */
+  color: #fff;
+}
+
+/* صورة الهيدر */
+.mv-hero img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+
+/* المحتوى */
+.mv-content {
+  padding: 60px 6%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.mv-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+.mv-block {
+  margin-bottom: 40px;
+}
+
+.mv-subtitle {
+  color: #f3c623; /* ذهبي */
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.mv-block ul {
+  list-style: none;
+  padding: 0;
+}
+
+.mv-block li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 12px;
+  line-height: 1.6;
+  color: #e6e6e6;
+  font-size: 15px;
+}
+
+/* النقطة */
+.mv-block li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #f3c623;
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mv-title {
+    font-size: 30px;
+  }
+
+  .mv-content {
+    padding: 40px 5%;
+  }
+
+  .mv-hero img {
+    height: 180px;
+  }
+}
