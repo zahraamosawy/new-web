@@ -1,12 +1,33 @@
 import "./NewsCenter.css";
 import { useTranslation } from "react-i18next";
-import { newsImages } from "../../data";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getItems } from "../api/items";
 
 const NewsCenter = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const newsData = t("newsCenter.items", { returnObjects: true });
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+  const fetchItems = async () => {
+    try {
+      const data = await getItems({
+        type: "news",
+        page: 1,
+        limit: 10,
+      });
+
+      setItems(data.items || data);
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchItems();
+}, []);
+
 
   return (
     <section className="news-center">
@@ -15,16 +36,30 @@ const NewsCenter = () => {
       </h2>
 
       <div className="news-grid">
-        {newsData.map((item, index) => (
+        {items.map((item, index) => (
           <div className="news-card" key={index}>
-            <img src={newsImages[item.image]} alt={item.title} />
+            <img
+              src={`http://localhost:5000/${item.image}`}
+              alt={item.titleEr}
+            />
+
             <div className="news-content">
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
+              <h3>
+                {i18n.language === "ar"
+                  ? item.titleAr
+                  : item.titleEr}
+              </h3>
+
+              <p>
+                {i18n.language === "ar"
+                  ? item.descriptionAr
+                  : item.descriptionEr}
+              </p>
             </div>
           </div>
         ))}
       </div>
+
       <Link to="/news" className="more-btn">
         {t("newsCenter.more")}
       </Link>
