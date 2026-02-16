@@ -6,29 +6,15 @@ const axiosInstance = axios.create({
   baseURL: API,
 });
 
-axiosInstance.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+export const getItems = async (page = 1, limit = 10) => {
+  try {
+    const res = await axiosInstance.get("/items", {
+      params: { page, limit },
+    });
 
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching items:", error);
+    return { items: [] };
   }
-
-  return config;
-});
-export const createItem = async (itemData) => {
-  const res = await axiosInstance.post("/items", itemData);
-  return res.data;
-};
-
-
-export const getItems = async ({ page = 1, limit = 10, itemtype }) => {
-  const res = await axiosInstance.get("/items", {
-    params: {
-      page,
-      limit,
-      itemtype: itemtype === "project" ? "project" : "news",
-    },
-  });
-
-  return res.data;
 };

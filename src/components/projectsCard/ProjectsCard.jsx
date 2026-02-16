@@ -1,30 +1,23 @@
-import React, { useEffect, useState } from "react";
 import "./ProjectsCard.css";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { getItems } from "../api/items";
+import { normalizeItemType } from "../../utils/normalizeItemType.js";
 
-function ProjectsCard() {
-
+const ProjectsCard = () => {
   const { t, i18n } = useTranslation();
-
-  const [projects, setProjects] = useState([]);
+  const [news, setNews] = useState([]);
 
   useEffect(() => {
     const fetchProjects = async () => {
-      try {
+      const data = await getItems(1, 50);
 
-        const data = await getItems({
-          itemtype: "project",
-          page: 1,
-          limit: 10,
-        });
+      const filteredProjects = data.items.filter(
+        (item) => normalizeItemType(item.itemType) === "project"
+      );
 
-        setProjects(data.items || data);
-
-      } catch (error) {
-        console.error(error);
-      }
+      setNews(filteredProjects);
     };
 
     fetchProjects();
@@ -32,45 +25,41 @@ function ProjectsCard() {
 
   return (
     <section className="projects-page">
+      {news.map((item) => {
+        const imageUrl =
+          item.images?.length > 0
+            ? `https://fg.com.iq/api/${item.images[0]}`
+            : "/placeholder.jpg";
 
-      {projects.map((item) => (
+        return (
+          <div className="projects-item" key={item.idItem}>
+            <img src={imageUrl} alt={item.titleEr} />
 
-        <div className="projects-item" key={item.id}>
+            <div className="projects-text">
+              <h3>
+                {i18n.language === "ar"
+                  ? item.titleAr
+                  : item.titleEr}
+              </h3>
 
-          <img
-            src={`https://fg.com.iq/${item.image}`}
-            alt={item.titleEr}
-          />
+              <p className="clamp">
+                {i18n.language === "ar"
+                  ? item.descriptionAr
+                  : item.descriptionEr}
+              </p>
 
-          <div className="news-text">
-
-            <h3>
-              {i18n.language === "ar"
-                ? item.titleAr
-                : item.titleEr}
-            </h3>
-
-            <p>
-              {i18n.language === "ar"
-                ? item.descriptionAr
-                : item.descriptionEr}
-            </p>
-
-            <Link
-              to={`/projects/${item.id}`}
-              className="details-btn"
-            >
-              {t("newsCenter.more")}
-            </Link>
-
+              <Link
+                to={`//${item.idItem}`}
+                className="details-btn"
+              >
+                {t("projectsCard.more")}
+              </Link>
+            </div>
           </div>
-
-        </div>
-
-      ))}
-
+        );
+      })}
     </section>
   );
-}
+};
 
 export default ProjectsCard;

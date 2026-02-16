@@ -1,46 +1,79 @@
 import "./NewsDetails.css";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { newsImages } from "../../data";
+import { useEffect, useState } from "react";
+import { getItems } from "../api/items";
+import { normalizeItemType } from "../../utils/normalizeItemType.js";
 
 const NewsDetails = () => {
   const { id } = useParams();
-  const { t } = useTranslation();
-  const newsData = t("newsCenter.items", { returnObjects: true });
+  const { t, i18n } = useTranslation();
 
-  const article = newsData[id];
+  const [article, setArticle] = useState(null);
+  const [recommended, setRecommended] = useState([]);
 
-  if (!article) return <h2>Not Found</h2>;
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getItems(1, 50);
+
+      const newsItems = data.items.filter(
+        (item) => normalizeItemType(item.itemType) === "news"
+      );
+
+      const selected = newsItems.find(
+        (item) => item.idItem === Number(id)
+      );
+
+      setArticle(selected);
+      setRecommended(
+        newsItems.filter((item) => item.idItem !== Number(id)).slice(0, 4)
+      );
+    };
+
+    fetchData();
+  }, [id]);
+
+  if (!article) return <h2>Loading...</h2>;
+
+  const imageUrl =
+    article.images?.length > 0
+      ? `https://fg.com.iq/uploads/${article.images[0]}`
+      : "/placeholder.jpg";
 
   return (
     <section className="single-news-container">
-      
-      {/* المحتوى الرئيسي */}
       <div className="single-news-content">
+        <h1>
+          {i18n.language === "ar"
+            ? article.titleAr
+            : article.titleEr}
+        </h1>
 
-        <h1>{article.title}</h1>
-        
-        <p>{article.desc}</p>
-         <img src={newsImages[article.image]} alt={article.title} />
+        <img src={imageUrl} alt={article.titleEr} />
+
+        <p>
+          {i18n.language === "ar"
+            ? article.descriptionAr
+            : article.descriptionEr}
+        </p>
       </div>
 
-      {/* السايدبار */}
       <aside className="news-sidebar">
         <h3>{t("newsCenter.recommended")}</h3>
 
-        {newsData.map((item, index) =>
-          index != id ? (
-            <div key={index} className="recommended-item">
-              <img src={newsImages[item.image]} alt={item.title} />
-              <div>
-                <h4>{item.title}</h4>
-                <Link to={`/news/${index}`}>
-                  {t("newsCenter.more")}
-                </Link>
-              </div>
-            </div>
-          ) : null
-        )}
+        {recommended.map((item) => (
+          <div key={item.idItem} className="recommended-item">
+            <h4>
+              {i18n.language === "ar"
+                ? item.titleAr
+                : item.titleEr}
+            </h4>
+
+            <Link to={`/news/${item.idItem}`}>
+              {t("newsCenter.more")}
+            </Link>
+          </div>
+        ))}
       </aside>
     </section>
   );
