@@ -1,29 +1,47 @@
 import "./NewsDetails.css";
+import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { newsImages } from "../../data";
-import { Link } from "react-router-dom";
 
 const NewsDetails = () => {
+  const { id } = useParams();
   const { t } = useTranslation();
   const newsData = t("newsCenter.items", { returnObjects: true });
 
+  const article = newsData[id];
+
+  if (!article) return <h2>Not Found</h2>;
+
   return (
-  <section className="news-page">
-      {newsData.map((item, index) => (
-        <div className="news-item" key={index}>
-          <img src={newsImages[item.image]} alt={item.title} />
+    <section className="single-news-container">
+      
+      {/* المحتوى الرئيسي */}
+      <div className="single-news-content">
 
-          <div className="news-text">
-            <h3>{item.title}</h3>
-            <p>{item.desc}</p>
+        <h1>{article.title}</h1>
+        
+        <p>{article.desc}</p>
+         <img src={newsImages[article.image]} alt={article.title} />
+      </div>
 
-            {/* زر التفاصيل */}
-            <Link to={`/news/${index}`} className="details-btn">
-              {t("newsCenter.more")}
-            </Link>
-          </div>
-        </div>
-      ))}
+      {/* السايدبار */}
+      <aside className="news-sidebar">
+        <h3>{t("newsCenter.recommended")}</h3>
+
+        {newsData.map((item, index) =>
+          index != id ? (
+            <div key={index} className="recommended-item">
+              <img src={newsImages[item.image]} alt={item.title} />
+              <div>
+                <h4>{item.title}</h4>
+                <Link to={`/news/${index}`}>
+                  {t("newsCenter.more")}
+                </Link>
+              </div>
+            </div>
+          ) : null
+        )}
+      </aside>
     </section>
   );
 };

@@ -14,16 +14,16 @@ const Header = () => {
 
   const toggleLang = () => {
     setFade(true); // بدء مرحلة الاختفاء
-    
+
     setTimeout(() => {
       const newLang = i18n.language === "en" ? "ar" : "en";
       i18n.changeLanguage(newLang);
       document.documentElement.lang = newLang;
       document.documentElement.dir = newLang === "ar" ? "rtl" : "ltr";
-      
+
       // ننتظر قليلاً ثم نبدأ مرحلة الظهور
       setFade(false);
-    }, 400); 
+    }, 400);
   };
 
   const navLinks = [
@@ -32,7 +32,7 @@ const Header = () => {
     { to: "/services", label: "services" },
     { to: "/projects", label: "projects" },
     { to: "/news", label: "news" },
-    { to: "/contact", label: "contact" }
+    { to: "/contact", label: "contact" },
   ];
 
   return (
@@ -59,18 +59,16 @@ const Header = () => {
               {t(link.label)}
             </NavLink>
           ))}
-          <button 
-          className={`lang-btn ${fade ? "fade-out" : "fade-in"}`} 
-          onClick={toggleLang}
-          style={{ "--i": navLinks.length }} // يظهر بعد آخر رابط مباشرة
-        >
-          <GrLanguage />
-        </button>
+          <button
+            className={`lang-btn ${fade ? "fade-out" : "fade-in"}`}
+            onClick={toggleLang}
+            style={{ "--i": navLinks.length }}
+            // يظهر بعد آخر رابط مباشرة
+          >
+            <span className="lang-text">  </span>
+            <GrLanguage />
+          </button>
         </nav>
-       
-        
-
-      
       </div>
     </header>
   );

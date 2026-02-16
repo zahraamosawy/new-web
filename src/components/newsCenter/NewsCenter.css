@@ -2,6 +2,10 @@
   padding: 80px 60px;
   background-color: #fff;
   text-align: center;
+  direction: ltr !important;
+  font-family: var(--font-en);
+  margin: 10px auto;
+
 }
 
 .news-title {
@@ -24,7 +28,9 @@
 
 /* Card */
 .news-card {
- display: flex;
+  width: 95%;
+  height: 120px;
+  display: flex;
   gap: 40px;
   align-items: center;
   background: #fff;
@@ -34,58 +40,83 @@
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+
 .news-card img {
   width: 160px;
-  height: 110px;
+  height: 120px;
   object-fit: cover;
   border-radius: 4px;
 }
 
 /* Content */
 .news-content h3 {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 540;
   margin-bottom: 8px;
   line-height: 1.4;
 }
 
 .news-content p {
+
   font-size: 14px;
-  color: #666;
+  color: #555;
   line-height: 1.6;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* عدد السطور */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
 }
+
+
+
 
 /* Button */
 .more-btn {
-  
-background: rgba(2, 67, 48, 0.8);
-  color: #fff;
-  border: none;
+  margin-top: 10px;
+  width: fit-content;
+  padding: 10px 22px;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 700;
+  border-radius: 50px;
   text-decoration: none;
-  padding: 14px 40px;
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
+
 }
 
 .more-btn:hover {
-  background-color:var(--background-color);
+  background-color: var(--background-color);
+  color: #fff;
+  transform: translateX(6px);
 }
 
 /* Responsive */
 @media (max-width: 900px) {
   .news-grid {
     grid-template-columns: 1fr;
+    margin: 0 auto;
+
   }
 
   .news-card {
     flex-direction: column;
+    height: 360px;
+    margin-bottom: 18px;
   }
 
   .news-card img {
     width: 100%;
     height: 200px;
+  }
+  .news-content p {
+    display: -webkit-box;
   }
 }

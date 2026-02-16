@@ -1,15 +1,14 @@
-import React from 'react'
-import StatsSection from '../components/statsSection/StatsSection'
-import NewsDetails from '../components/newsDetails/NewsDetails';
+import React from "react";
+import StatsSection from "../components/statsSection/StatsSection";
+import NewsList from "../components/newsDetails/NewsList";
 
 function News() {
   return (
-    <div>
+    <>
       <StatsSection />
-      <NewsDetails />
-
-    </div>
-  )
+      <NewsList />
+    </>
+  );
 }
 
 export default News;

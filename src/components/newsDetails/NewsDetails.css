@@ -1,119 +1,123 @@
-/* =========================
-   News Page Layout
-========================= */
+/* ===============================
+   Layout
+================================= */
 
-.news-page {
-  max-width: 1200px;
-  margin: auto;
-  padding: 60px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
+.single-news-container {
+  width: 85%;
+  margin: 80px auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 50px;
+  font-family: var(--font-en);
+  direction: ltr !important;
+
+
 }
 
-/* =========================
-   Single News Item
-========================= */
+/* ===============================
+   Main Article
+================================= */
 
-.news-item {
-  display: flex;
-  gap: 40px;
-  align-items: center;
-  background: #fff;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+.single-news-content h1 {
+  font-size: 32px;
+  margin-bottom: 25px;
+  font-weight: 600;
+  color: #222;
+  font-family: var(--font-en);
+
 }
 
-.news-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.1);
-}
-
-/* =========================
-   Image
-========================= */
-
-.news-item img {
-  width: 420px;
-  height: 260px;
+.single-news-content img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 25px;
   object-fit: cover;
-  flex-shrink: 0;
 }
 
-/* =========================
-   Text Content
-========================= */
+.single-news-content p {
+  line-height: 1.9;
+  font-size: 17px;
+  color: #444;
+  margin-bottom: 20px;
+}
 
-.news-text {
-  padding: 30px 35px;
+/* ===============================
+   Sidebar
+================================= */
+
+.news-sidebar {
+  background: #f5f5f5;
+  padding: 25px;
+  border-radius: 10px;
+  height: fit-content;
+}
+
+.news-sidebar h3 {
+  font-size: 20px;
+  color: red;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* ===============================
+   Recommended Items
+================================= */
+
+.recommended-item {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: center;
 }
 
-.news-text h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #111;
-  line-height: 1.4;
+.recommended-item img {
+  width: 80px;
+  height: 60px;
+  border-radius: 6px;
+  object-fit: cover;
 }
 
-.news-text p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.8;
-  max-width: 620px;
+.recommended-item h4 {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #222;
 }
 
-/* =========================
-   Button
-========================= */
-
-.details-btn {
-  margin-top: 10px;
-  width: fit-content;
-  padding: 10px 22px;
-  border: 2px solid var(--color-primary);
-  color: var(--color-primary);
-  font-weight: 700;
-  border-radius: 50px;
+.recommended-item a {
+  font-size: 13px;
   text-decoration: none;
-  transition: all 0.3s ease;
+  border: 1px solid red;
+  padding: 6px 12px;
+  border-radius: 5px;
+  color: red;
+  transition: 0.3s;
 }
 
-.details-btn:hover {
-  background: var( --background-color);
-  color: #fff;
-  transform: translateX(6px);
+.recommended-item a:hover {
+  background: red;
+  color: white;
 }
 
-/* =========================
-   Responsive (Tablet & Mobile)
-========================= */
+/* ===============================
+   Responsive
+================================= */
 
-@media (max-width: 900px) {
-  .news-item {
-    flex-direction: column;
+@media (max-width: 992px) {
+  .single-news-container {
+    grid-template-columns: 1fr;
   }
 
-  .news-item img {
-    width: 100%;
-    height: 240px;
-  }
-
-  .news-text {
-    padding: 25px;
+  .news-sidebar {
+    margin-top: 40px;
   }
 }
 
-@media (max-width: 480px) {
-  .news-text h3 {
-    font-size: 1.25rem;
+@media (max-width: 600px) {
+  .single-news-content h1 {
+    font-size: 24px;
   }
 
-  .news-text p {
-    font-size: 0.95rem;
+  .single-news-content p {
+    font-size: 15px;
   }
 }

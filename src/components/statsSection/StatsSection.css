@@ -2,39 +2,42 @@
   padding: 40px 5% 80px;
   background: #fff;
   direction: ltr !important;
+  font-family: var(--font-en);
+
 }
 
 .stats-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
+  grid-template-columns: repeat(4 , 1fr);
+  gap: 10px;
   text-align: center;
 }
 
-.stat-card h3 {
-  font-size: 42px;
-  font-weight: 800;
+
+.stat-card h3  {
+  font-size: 58px;
+  font-weight: 700;
   color: #d60000;
   margin-bottom: 5px;
 }
 
 .stat-card h3 small {
-  font-size: 16px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 26px;
+  font-weight: 700;
   color: #6d6b6b;
-  margin-left: 6px;
+  margin-left: 10px;
 }
 
 .stat-card p {
-  font-size: 20px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 30px;
   font-weight: 600;
   color: #000;
 }
 
 .stat-value {
   display: inline-block;
-  min-width: 1.5ch; /* يحجز مساحة الرقم لكي لا تتحرك الكلمة بجانبه */
+  min-width: 1.5ch;
+  /* يحجز مساحة الرقم لكي لا تتحرك الكلمة بجانبه */
   text-align: right;
 }
 

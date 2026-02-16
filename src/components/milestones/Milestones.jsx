@@ -32,7 +32,11 @@ const Milestones = () => {
             <MilestoneItem key={i} item={item} number={i + 4} />
           ))}
         </div>
-
+             <div className="milestones-column-full">
+          {items.map((item, i) => (
+            <MilestoneItem key={i} item={item} number={i + 1} />
+          ))}
+        </div>
       </div>
     </section>
   );

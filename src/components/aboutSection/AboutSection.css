@@ -2,9 +2,11 @@
   padding: 10px 5%;
   background: #fff;
   margin-top: 50px;
-   box-shadow: 0 5px 5px #0000001a;
-   border-radius: 9px;
-   direction: ltr !important;
+  box-shadow: 0 5px 5px #0000001a;
+  border-radius: 9px;
+  direction: ltr !important;
+  font-family: var(--font-en);
+
 }
 
 .about-container {
@@ -25,7 +27,7 @@
   font-size: 40px;
   font-weight: 700;
   margin-bottom: 20px;
-  color:var(--background-color);
+  color: var(--background-color);
 }
 
 .about-text {
@@ -60,6 +62,7 @@
   border-radius: 6px;
   object-fit: cover;
 }
+
 .fade-in {
   opacity: 1;
   transform: translateY(0);

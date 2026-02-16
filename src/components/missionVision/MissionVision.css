@@ -1,6 +1,14 @@
 .mission-vision {
-  background: #0f3f3f; /* أخضر داكن مثل التصميم */
+  width: 90%;
+  margin: 10px auto;
+  background: rgba(21, 69, 54, 0.5);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 1000;
+
+  /* أخضر داكن مثل التصميم */
   color: #fff;
+  font-family: var(--font-en-);
 }
 
 /* صورة الهيدر */
@@ -13,6 +21,10 @@
 
 /* المحتوى */
 .mv-content {
+   background: rgba(21, 69, 54, 0.5);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 1000;
   padding: 60px 6%;
   max-width: 1400px;
   margin: 0 auto;
@@ -30,7 +42,8 @@
 }
 
 .mv-subtitle {
-  color: #f3c623; /* ذهبي */
+  color: #f3c623;
+  /* ذهبي */
   font-weight: 700;
   letter-spacing: 1px;
   margin-bottom: 15px;

@@ -3,7 +3,7 @@
   "about": "About",
   "services": "Services",
   "projects": "Projects",
-  "news": "news",
+  "news": "News",
   "contact": "Contact",
 
   "aboutUs": {
@@ -70,6 +70,7 @@
   "newsCenter": {
     "titleRed": "NEWS",
     "titleBlack": "CENTER",
+     "recommended": "Recommended Articles",
     "more": "MORE >>>",
     "items": [
       {
