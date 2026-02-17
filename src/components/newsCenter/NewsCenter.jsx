@@ -11,9 +11,9 @@ const NewsCenter = () => {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const data = await getItems(1, 10);
+      const data = await getItems({ type: "news", page: 1, limit: 10 });
 
-      const filteredNews = data.items.filter(
+      const filteredNews = data.filter(
         (item) => normalizeItemType(item.itemType) === "news"
       );
 
@@ -22,6 +22,8 @@ const NewsCenter = () => {
 
     fetchItems();
   }, []);
+
+  if (news.length === 0) return <div>No news available</div>;
 
   return (
     <section className="news-center">

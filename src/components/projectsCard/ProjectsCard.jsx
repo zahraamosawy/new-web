@@ -7,25 +7,48 @@ import { normalizeItemType } from "../../utils/normalizeItemType.js";
 
 const ProjectsCard = () => {
   const { t, i18n } = useTranslation();
-  const [news, setNews] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const data = await getItems(1, 50);
+      try {
+        console.log("Starting to fetch projects...");
+        const data = await getItems({ type: "project", page: 1, limit: 50 });
+        
+        console.log("Projects data received:", data); // للتحقق من البيانات
+        console.log("Number of items received:", data.length);
+        
+        // عرض كل عنصر وتصنيفه
+        data.forEach(item => {
+          const normalizedType = normalizeItemType(item.itemType);
+          console.log(`Item ${item.idItem}: type="${item.itemType}" -> normalized="${normalizedType}"`);
+        });
 
-      const filteredProjects = data.items.filter(
-        (item) => normalizeItemType(item.itemType) === "project"
-      );
-
-      setNews(filteredProjects);
+        const filteredProjects = data.filter(
+          (item) => normalizeItemType(item.itemType) === "project"
+        );
+        
+        console.log("Filtered projects:", filteredProjects); // للتحقق من البيانات بعد التصفية
+        console.log("Number of filtered projects:", filteredProjects.length);
+        
+        setProjects(filteredProjects);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+        setLoading(false);
+      }
     };
 
     fetchProjects();
   }, []);
 
+  if (loading) return <div>Loading...</div>;
+  if (projects.length === 0) return <div>No projects available</div>;
+
   return (
     <section className="projects-page">
-      {news.map((item) => {
+      {projects.map((item) => {
         const imageUrl =
           item.images?.length > 0
             ? `https://fg.com.iq/api/${item.images[0]}`
@@ -49,7 +72,7 @@ const ProjectsCard = () => {
               </p>
 
               <Link
-                to={`//${item.idItem}`}
+                to={`/projects/${item.idItem}`}
                 className="details-btn"
               >
                 {t("projectsCard.more")}

@@ -1,63 +1,70 @@
 import "./NewsList.css";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getItems } from "../api/items";
-import { normalizeItemType } from "../../utils/normalizeItemType.js";
 
 const NewsList = () => {
   const { t, i18n } = useTranslation();
+
   const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchNews = async () => {
-      const data = await getItems(1, 50);
+ useEffect(() => {
+  const fetchNews = async () => {
+    try {
+      const data = await getItems({ type: "news" });
+      setNews(data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching news:", error);
+      setLoading(false);
+    }
+  };
+  
 
-      const filteredNews = data.items.filter(
-        (item) => normalizeItemType(item.itemType) === "news"
-      );
+  fetchNews();
+}, []);
 
-      setNews(filteredNews);
-    };
 
-    fetchNews();
-  }, []);
+  if (loading) return <div>Loading...</div>;
+
+  if (news.length === 0) return <div>No news available</div>;
 
   return (
     <section className="news-page">
-      {news.map((item) => {
-        const imageUrl =
-          item.images?.length > 0
-            ? `https://fg.com.iq/uploads/${item.images[0]}`
-            : "/placeholder.jpg";
+      {news.map((item) => (
+        <div className="news-item" key={item.idItem}>
+          
+          {/* صورة افتراضية حالياً */}
+          <img
+            src="/placeholder.jpg"
+            alt={i18n.language === "ar" ? item.titleAr : item.titleEr}
+          />
 
-        return (
-          <div className="news-item" key={item.idItem}>
-            <img src={imageUrl} alt={item.titleEr} />
+          <div className="news-text">
+            <h3>
+              {i18n.language === "ar"
+                ? item.titleAr
+                : item.titleEr}
+            </h3>
 
-            <div className="news-text">
-              <h3>
-                {i18n.language === "ar"
-                  ? item.titleAr
-                  : item.titleEr}
-              </h3>
+            <p>
+              {i18n.language === "ar"
+                ? item.descriptionAr
+                : item.descriptionEr}
+            </p>
 
-              <p className="clamp">
-                {i18n.language === "ar"
-                  ? item.descriptionAr
-                  : item.descriptionEr}
-              </p>
+            <Link
+              to={`/news/${item.idItem}`}
+              className="details-btn"
+            >
+              {t("newsCenter.more")}
+            </Link>
 
-              <Link
-                to={`/news/${item.idItem}`}
-                className="details-btn"
-              >
-                {t("newsCenter.more")}
-              </Link>
-            </div>
           </div>
-        );
-      })}
+        </div>
+      ))}
     </section>
   );
 };

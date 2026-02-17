@@ -14,9 +14,9 @@ const NewsDetails = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getItems(1, 50);
+      const data = await getItems({ type: "news", page: 1, limit: 50 });
 
-      const newsItems = data.items.filter(
+      const newsItems = data.filter(
         (item) => normalizeItemType(item.itemType) === "news"
       );
 
@@ -37,7 +37,7 @@ const NewsDetails = () => {
 
   const imageUrl =
     article.images?.length > 0
-      ? `https://fg.com.iq/uploads/${article.images[0]}`
+      ? `https://fg.com.iq/api/${article.images[0]}`
       : "/placeholder.jpg";
 
   return (

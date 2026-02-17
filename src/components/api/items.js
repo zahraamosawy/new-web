@@ -1,20 +1,24 @@
-import axios from "axios";
+// api/items.js
+import axiosInstance from "./axiosInstance";
 
-const API = "https://fg.com.iq/api";
-
-const axiosInstance = axios.create({
-  baseURL: API,
-});
-
-export const getItems = async (page = 1, limit = 10) => {
+export const getItems = async ({ type = "news", page = 1, limit = 10 }) => {
   try {
-    const res = await axiosInstance.get("/items", {
-      params: { page, limit },
-    });
+    const params = {
+      page,
+      limit,
+      type: type.toLowerCase(), // تأكيد lowercase
+    };
+    
+    console.log("Sending request with params:", params);
+    
+    const res = await axiosInstance.get("/items", { params });
+    
+    console.log("Fetching items with type:", type);
+    console.log("API Response:", res.data);
 
-    return res.data;
+    return res.data.items || [];
   } catch (error) {
-    console.error("Error fetching items:", error);
-    return { items: [] };
+    console.error("getItems error:", error);
+    return [];
   }
 };

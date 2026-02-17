@@ -100,6 +100,55 @@
       }
     ]
   },
+  "projectsCard": {
+    "more": "اكتشف المزيد  >>>"
+  },
+  "productsCard": {
+    "title": "المنتجات"
+  },
+  "login": {
+    "title": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "submit": "دخول",
+    "loading": "جاري تسجيل الدخول...",
+    "noAccount": "ليس لديك حساب؟",
+    "register": "سجل الآن"
+  },
+  "register": {
+    "title": "إنشاء حساب جديد",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "submit": "إنشاء حساب",
+    "loading": "جاري إنشاء الحساب...",
+    "passwordMismatch": "كلمات المرور غير متطابقة",
+    "hasAccount": "لديك حساب بالفعل؟",
+    "login": "سجل الدخول"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "logout": "تسجيل الخروج",
+    "projects": "المشاريع",
+    "news": "الأخبار",
+    "products": "المنتجات",
+    "add": "إضافة",
+    "list": "قائمة",
+    "loading": "جاري التحميل...",
+    "titleAr": "العنوان بالعربية",
+    "titleEr": "العنوان بالإنجليزية",
+    "subTitleAr": "العنوان الفرعي بالعربية",
+    "subTitleEr": "العنوان الفرعي بالإنجليزية",
+    "descriptionAr": "الوصف بالعربية",
+    "descriptionEr": "الوصف بالإنجليزية",
+    "images": "الصور",
+    "uploadImages": "رفع الصور",
+    "submit": "حفظ",
+    "delete": "حذف",
+    "confirmDelete": "هل أنت متأكد من حذف هذا العنصر؟",
+    "noItems": "لا توجد عناصر لعرضها"
+  },
   "milestones": {
     "title": "الإنجازات الرئيسية",
     "items": [

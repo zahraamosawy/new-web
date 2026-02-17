@@ -12,6 +12,9 @@ import News from "./page/News.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import LanguageToggle from "./components/languageToggle/LanguageToggle.jsx";
 import NewsDetails from "./components/newsDetails/NewsDetails.jsx";
+import Login from "./page/Login.jsx";
+import Register from "./page/Register.jsx";
+import Dashboard from "./page/Dashboard.jsx";
 
 function App() {
   return (
@@ -20,6 +23,7 @@ function App() {
 
       <main className="main-content">
         <Routes>
+          
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
@@ -28,6 +32,9 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/news/:id" element={<NewsDetails />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
         <LanguageToggle />
         <SocialNav />
