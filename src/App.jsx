@@ -10,16 +10,17 @@ import Projects from "./page/Projects.jsx";
 import Contact from "./page/Contact.jsx";
 import News from "./page/News.jsx";
 import Footer from "./components/footer/Footer.jsx";
-import LanguageToggle from "./components/languageToggle/LanguageToggle.jsx";
 import NewsDetails from "./components/newsDetails/NewsDetails.jsx";
 import Login from "./page/Login.jsx";
 import Register from "./page/Register.jsx";
 import Dashboard from "./page/Dashboard.jsx";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <div className="app-layout">
       <Header />
+           <Toaster position="top-center" />
 
       <main className="main-content">
         <Routes>
@@ -36,9 +37,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
-        <LanguageToggle />
         <SocialNav />
       </main>
+      
 
       <Footer />
     </div>

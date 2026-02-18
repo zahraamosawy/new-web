@@ -178,7 +178,41 @@
         "text": "Achieved a portfolio of over 300 completed solar projects, marking a significant step toward large-scale and government-sector expansion."
       }
     ]
+  },
+  "social": {
+    "whatsappMessage": "Hello, I would like to inquire about FG Company services.",
+    "emailSubject": "Inquiry about FG Company services",
+    "emailBody": "Hello,\n\nI would like to know more about your services.\n\nThank you."
+  },
+ 
+  "contactUs": {
+    "title": "Contact Us",
+    "company": "Future Generation",
+
+    "addressTitle": "Our Address:",
+
+    "mainBranch": "Main Branch: Babylon – Al-Hillah – Al-Jamia Street",
+    "secondBranch": "Second Branch: Baghdad – Al-Sinaa Street – Al-Tamimi Complex",
+
+    "phones": "07750003399 - 07769100100",
+
+    "whatsappLabel": "WhatsApp:",
+    "emailLabel": "Email:",
+
+    "form": {
+      "name": "Please enter your name",
+      "whatsapp": "Please enter your WhatsApp",
+      "email": "Please enter your email",
+      "message": "Please enter your message",
+      "submit": "Submit"
+    }
   }
 }
+
+
+
+
+
+
 
 

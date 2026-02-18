@@ -1,14 +1,13 @@
 import React from "react";
 import AboutSection from "../components/aboutSection/AboutSection";
 import MissionVision from "../components/missionVision/MissionVision";
-import Sidebar from "../components/sidebar/Sidebar";
 import SolarImportance from "../components/solarImportance/SolarImportance";
+import HeroSlider from "../components/heroSlider/HeroSlider";
 
 function About() {
   return (
     <div>
-      
-      <Sidebar />
+      <HeroSlider />
       <AboutSection />
       <MissionVision />
       <SolarImportance />

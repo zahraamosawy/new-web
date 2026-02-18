@@ -19,6 +19,7 @@
   /* ========== Fonts ========== */
   --font-en: "Helvetica World", Arial, sans-serif;
   --font-ar: "Madani Arabic", "Arial", sans-serif;
+  --swiper-theme-color: var(--color-primary);
 }
 /* ========== Base Styles ========== */
 .container {

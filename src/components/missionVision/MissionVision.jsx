@@ -1,6 +1,6 @@
 import "./MissionVision.css";
 import { useTranslation } from "react-i18next";
-import heroImg from "../../img/16.jpeg";
+import heroImg from "../../img/img2/future2.jpeg";
 
 const MissionVision = () => {
   const { t } = useTranslation();

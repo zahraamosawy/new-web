@@ -1,6 +1,7 @@
 .contact {
   padding: 60px 8%;
   background: #fff;
+  font-family: var(--font-en);
 }
 
 /* Breadcrumb */

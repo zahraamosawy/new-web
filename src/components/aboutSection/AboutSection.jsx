@@ -1,5 +1,5 @@
 import "./AboutSection.css";
-import aboutImg from "../../img/images.jpg";
+import aboutImg from "../../img/img3.png";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";

@@ -58,6 +58,10 @@ const Header = () => {
             >
               {t(link.label)}
             </NavLink>
+
+
+            
+
           ))}
           <button
             className={`lang-btn ${fade ? "fade-out" : "fade-in"}`}
@@ -65,7 +69,6 @@ const Header = () => {
             style={{ "--i": navLinks.length }}
             // يظهر بعد آخر رابط مباشرة
           >
-            <span className="lang-text">  </span>
             <GrLanguage />
           </button>
         </nav>

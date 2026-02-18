@@ -1,7 +1,7 @@
 import "./SolarImportance.css";
 import { FaLeaf, FaRecycle, FaDollarSign, FaBolt } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import img from "../../img/16.jpeg";
+import img from "../../img/img2/future2.jpeg";
 
 const icons = [FaLeaf, FaRecycle, FaDollarSign, FaBolt];
 

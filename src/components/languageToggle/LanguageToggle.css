@@ -15,32 +15,28 @@
   transform: scale(0.5) translateY(20px);
 }
 
-.lang-icon {
-  font-size: 25px;
-}
-.lang-btn-fixed{
-  direction: ltr ;
-}
+
+
 
 
 /* ✅ يظهر في الآيباد والموبايل */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .lang-btn-fixed {
     position: fixed;
-    bottom: 12px;
-    right: 20px;
-    z-index: 2000;
+    bottom: 10px;
+    /* لجعل العنصر في المنتصف تماماً */
+    left: 80%;
+    transform: translateX(-50%) scale(0.5) translateY(20px);
     display: flex;
     align-items: center;
-    background: rgba(21, 69, 54, 0.8);
     color:var( --color-gold);
     padding: 12px 16px;
     border-radius: 40px;
     border: none;
     cursor: pointer;
+    font-size: 25px;
     font-weight: 900;
     font-family:var(--font-en) ;
-
 
     opacity: 0;
     transform: scale(0.5) translateY(20px);

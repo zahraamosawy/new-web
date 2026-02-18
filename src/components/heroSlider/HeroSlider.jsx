@@ -32,7 +32,7 @@ const HeroSlider = () => {
             </div>
 
             <img
-              src="/src/img/15.jpeg"
+              src="/src/img/img2/future1.jpeg"
               alt="slider hero 1"
             />
           </SwiperSlide>
@@ -48,7 +48,7 @@ const HeroSlider = () => {
             </div>
 
             <img
-              src="/src/img/16.jpeg"
+              src="/src/img/img2/future3.jpeg"
               alt="slider hero 2"
             />
           </SwiperSlide>
@@ -62,7 +62,7 @@ const HeroSlider = () => {
             </div>
 
             <img
-              src="/src/img/12.jpeg"
+              src="/src/img/img2/future2.jpeg"
               alt="slider hero 2"
             />
           </SwiperSlide>
