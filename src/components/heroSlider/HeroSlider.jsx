@@ -1,72 +1,87 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import "swiper/css";
 import "swiper/css/pagination";
 
 import "./HeroSlider.css";
 
+// import images correctly (IMPORTANT)
+import img1 from "../../img/img2/future4.JPG";
+import img2 from "../../img/img2/3.jpeg";
+import img3 from "../../img/img2/future2.jpeg";
+
 const HeroSlider = () => {
+  const { t } = useTranslation();
+
+  // slides data
+  const slides = [
+    {
+      image: img1,
+      titleKey: "hero.slide1.title",
+    },
+    {
+      image: img2,
+      titleKey: "hero.slide2.title",
+    },
+    {
+      image: img3,
+      titleKey: "hero.slide3.title",
+    },
+  ];
+
+  // function to render multiline title
+  const renderTitle = (key) =>
+    t(key)
+      .split("\n")
+      .map((line, index) => (
+        <React.Fragment key={index}>
+          {line}
+          <br />
+        </React.Fragment>
+      ));
+
   return (
     <section className="hero">
       <div className="container">
+
         <Swiper
           loop={true}
           autoplay={{
-            delay: 2500,
+            delay: 3500,
             disableOnInteraction: false,
           }}
-          pagination={{ clickable: true }}
+          pagination={{
+            clickable: true,
+          }}
           modules={[Pagination, Autoplay]}
           className="mySwiper"
         >
-          {/* Slide 1 */}
-          <SwiperSlide>
-            <div className="content">
-              <h3>
-                Microsoft Xbox <br /> 360 Controller
-              </h3>
-            
-            </div>
 
-            <img
-              src="/src/img/img2/future1.jpeg"
-              alt="slider hero 1"
-            />
-          </SwiperSlide>
+          {slides.map((slide, index) => (
+            <SwiperSlide key={index}>
 
-          {/* Slide 2 */}
-          <SwiperSlide>
-            <div className="content">
-             
-              <h3>
-                Solar Energy <br /> Solutions
-              </h3>
-          
-            </div>
+              {/* TEXT */}
+              <div className="content">
+                <h3>
+                  {renderTitle(slide.titleKey)}
+                </h3>
+              </div>
 
-            <img
-              src="/src/img/img2/future3.jpeg"
-              alt="slider hero 2"
-            />
-          </SwiperSlide>
-           <SwiperSlide>
-            <div className="content">
-             
-              <h3>
-                Solar Energy <br /> Solutions
-              </h3>
-            
-            </div>
+              {/* IMAGE */}
+              <img
+                src={slide.image}
+                alt={`slide-${index}`}
+                className="hero-image"
+              />
 
-            <img
-              src="/src/img/img2/future2.jpeg"
-              alt="slider hero 2"
-            />
-          </SwiperSlide>
+            </SwiperSlide>
+          ))}
+
         </Swiper>
+
       </div>
     </section>
   );

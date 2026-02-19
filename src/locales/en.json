@@ -6,6 +6,23 @@
   "news": "News",
   "contact": "Contact",
 
+
+
+  
+  "hero": {
+    "slide1": {
+      "title": "Future Generation\nTechnology and Information"
+    },
+    "slide2": {
+      "title": "Advanced Solar\nEnergy Solutions"
+    },
+    "slide3": {
+      "title": "Modern Technology\nServices"
+    }
+  },
+
+
+
   "aboutUs": {
     "title": "About Us",
     "paragraph1": "Future Generation for Information Technology was established with a clear vision to deliver reliable, high-efficiency solar energy solutions tailored to the Iraqi market. From the outset, the company focused on building strong technical expertise and delivering fully integrated services that cover the complete project lifecycle.",

@@ -1,65 +1,47 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import axiosInstance from "../api/axiosInstance"; // تأكد من المسار الصحيح
 import "./ItemsList.css";
 
 const ItemsList = ({ items, type, onItemDeleted }) => {
   const { t, i18n } = useTranslation();
-  const [loading, setLoading] = useState(false);
+  const [loadingId, setLoadingId] = useState(null);
 
   const handleDelete = async (id) => {
-    if (!window.confirm(t("dashboard.confirmDelete"))) {
-      return;
-    }
+    if (!window.confirm(t("dashboard.confirmDelete"))) return;
 
-    setLoading(true);
     try {
-      // استبدل هذا الرابط برابط API الفعلي
-      const response = await fetch(`https://fg.com.iq/api/items/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+      setLoadingId(id);
+
+      await axiosInstance.delete("/items", {
+        data: { id }, // مهم جداً لأن axios يحط body بهالشكل بالـ DELETE
       });
 
-      if (response.ok) {
-        // إعلام المكون الأصل بحذف العنصر
+      if (onItemDeleted) {
         onItemDeleted();
-      } else {
-        console.error("Failed to delete item");
       }
     } catch (error) {
-      console.error("Error deleting item:", error);
+      console.error("Delete error:", error.response?.data || error.message);
     } finally {
-      setLoading(false);
+      setLoadingId(null);
     }
   };
 
-  if (items.length === 0) {
-    return (
-      <div className="empty-list">
-        <p>{t("dashboard.noItems")}</p>
-      </div>
-    );
+  if (!items || items.length === 0) {
+    return <div className="empty-list">{t("dashboard.noItems")}</div>;
   }
 
   return (
     <div className="items-list">
-      <h2>
-        {t("dashboard.list")}{" "}
-        {type === "projects"
-          ? t("dashboard.projects")
-          : type === "news"
-          ? t("dashboard.news")
-          : t("dashboard.products")}
-      </h2>
+      <h2>{t("dashboard.list")}</h2>
 
       <div className="items-container">
         {items.map((item) => (
-          <div className="item-card" key={item.idItem}>
+          <div className="item-card" key={item.id}>
             {item.images && item.images.length > 0 && (
               <div className="item-image">
                 <img
-                  src={`https://fg.com.iq/api/${item.images[0]}`}
+                  src={`/api/${item.images[0]}`} 
                   alt={
                     i18n.language === "ar"
                       ? item.titleAr
@@ -76,35 +58,20 @@ const ItemsList = ({ items, type, onItemDeleted }) => {
                   : item.titleEr}
               </h3>
 
-              {item.subTitleAr && item.subTitleEr && (
-                <h4>
-                  {i18n.language === "ar"
-                    ? item.subTitleAr
-                    : item.subTitleEr}
-                </h4>
-              )}
-
-              <p className="item-description">
+              <p>
                 {i18n.language === "ar"
                   ? item.descriptionAr
                   : item.descriptionEr}
               </p>
 
-              <div className="item-footer">
-                <span className="item-date">
-                  {new Date(item.created_at).toLocaleDateString(
-                    i18n.language === "ar" ? "ar-SA" : "en-US"
-                  )}
-                </span>
-
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDelete(item.idItem)}
-                  disabled={loading}
-                >
-                  {t("dashboard.delete")}
-                </button>
-              </div>
+              <button
+                onClick={() => handleDelete(item.id)}
+                disabled={loadingId === item.id}
+              >
+                {loadingId === item.id
+                  ? t("dashboard.deleting")
+                  : t("dashboard.delete")}
+              </button>
             </div>
           </div>
         ))}

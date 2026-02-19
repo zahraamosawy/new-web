@@ -50,7 +50,7 @@ export default function ImageUpload() {
   return (
     <div>
       <input type="file" accept="image/*" onChange={handleImageChange} />
-
+      
       {preview && (
         <div>
           <img src={preview} alt="Preview" width="300" />

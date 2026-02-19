@@ -22,3 +22,4 @@ export const getItems = async ({ type = "news", page = 1, limit = 10 }) => {
     return [];
   }
 };
+

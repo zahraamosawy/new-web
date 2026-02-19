@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-hot-toast";
+import { login } from "../components/api/auth"; // ← المسار الصحيح حسب مشروعك
 import "./Login.css";
 
 const Login = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    email: "info.fg.iq@gmail.com", // حسب Postman (مطلوب)
+  });
 
   const handleChange = (e) => {
     setFormData({
@@ -23,30 +27,31 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
 
     try {
-      // استبدل هذا الرابط برابط API الفعلي
-      const response = await fetch("https://fg.com.iq/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      // استخدام auth.js بدل fetch
+      const data = await login(formData);
 
-      const data = await response.json();
+      // حفظ بيانات المستخدم
+      localStorage.setItem("user", JSON.stringify(data));
 
-      if (response.ok) {
-        // حفظ التوكن في localStorage
-        localStorage.setItem("token", data.token);
-        // الانتقال إلى لوحة التحكم
-        navigate("/dashboard");
-      } else {
-        setError(data.message || "Login failed");
-      }
-    } catch (err) {
-      setError("An error occurred. Please try again.");
+      toast.success(t("login.success") || "Login successful");
+
+      // الانتقال
+      navigate("/dashboard");
+
+      // تحديث الصفحة لتحديث الهيدر
+      window.location.reload();
+
+    } catch (error) {
+      console.error(error);
+
+      toast.error(
+        error.response?.data?.message ||
+        t("login.error") ||
+        "Login failed"
+      );
+
     } finally {
       setLoading(false);
     }
@@ -55,40 +60,48 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-form">
+
         <h2>{t("login.title")}</h2>
-        {error && <div className="error-message">{error}</div>}
+
         <form onSubmit={handleSubmit}>
+
           <div className="form-group">
-            <label htmlFor="email">{t("login.email")}</label>
+            <label>{t("login.username")}</label>
+
             <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
+              type="text"
+              name="username"
+              value={formData.username}
               onChange={handleChange}
               required
             />
+
           </div>
+
           <div className="form-group">
-            <label htmlFor="password">{t("login.password")}</label>
+
+            <label>{t("login.password")}</label>
+
             <input
               type="password"
-              id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               required
             />
+
           </div>
+
           <button type="submit" disabled={loading}>
-            {loading ? t("login.loading") : t("login.submit")}
+
+            {loading
+              ? <span className="loader"></span>
+              : t("login.submit")}
+
           </button>
+
         </form>
-        <div className="login-footer">
-          <p>
-            {t("login.noAccount")} <a href="/register">{t("login.register")}</a>
-          </p>
-        </div>
+
       </div>
     </div>
   );

@@ -1,0 +1,47 @@
+.project-details {
+  max-width: 1000px;
+  margin: auto;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.project-details img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.project-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.project-details-content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.project-details-content p {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: #555;
+}
+
+.back-btn {
+  width: fit-content;
+  padding: 10px 25px;
+  border-radius: 50px;
+  border: 2px solid var(--color-primary);
+  background: transparent;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: var(--color-primary);
+  color: #fff;
+}

@@ -5,6 +5,7 @@ import "./ItemForm.css";
 
 const ItemForm = ({ type, onItemAdded }) => {
   const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     titleAr: "",
     titleEr: "",
@@ -14,6 +15,7 @@ const ItemForm = ({ type, onItemAdded }) => {
     descriptionEr: "",
     itemType: type,
   });
+
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -35,50 +37,64 @@ const ItemForm = ({ type, onItemAdded }) => {
     setError("");
 
     try {
-      // إنشاء FormData لإرسال البيانات والصور
-      const itemFormData = new FormData();
-
-      // إضافة الحقول النصية
-      Object.keys(formData).forEach(key => {
-        itemFormData.append(key, formData[key]);
-      });
-
-      // إضافة الصور
-      images.forEach((image, index) => {
-        itemFormData.append(`images[${index}]`, image.file);
-      });
-
-      // استبدل هذا الرابط برابط API الفعلي
-      const response = await fetch("https://fg.com.iq/api/items", {
+      // 1️⃣ إنشاء العنصر (JSON فقط)
+      const createResponse = await fetch("https://fg.com.iq/api/items", {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: itemFormData,
+        body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const createData = await createResponse.json();
 
-      if (response.ok) {
-        // إعادة تعيين النموذج
-        setFormData({
-          titleAr: "",
-          titleEr: "",
-          subTitleAr: "",
-          subTitleEr: "",
-          descriptionAr: "",
-          descriptionEr: "",
-          itemType: type,
-        });
-        setImages([]);
-
-        // إعلام المكون الأصل بإضافة عنصر جديد
-        onItemAdded();
-      } else {
-        setError(data.message || "Failed to add item");
+      if (!createResponse.ok) {
+        throw new Error(createData.message || "Failed to create item");
       }
+
+      const newItemId = createData.item_id;
+
+      // 2️⃣ رفع الصور بعد إنشاء العنصر
+      if (images.length > 0) {
+        for (let image of images) {
+          const imageFormData = new FormData();
+          imageFormData.append("image", image.file);
+          imageFormData.append("idItem", newItemId);
+
+          const imageResponse = await fetch(
+            "https://fg.com.iq/api/items-image",
+            {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+              body: imageFormData,
+            }
+          );
+
+          if (!imageResponse.ok) {
+            console.error("Image upload failed");
+          }
+        }
+      }
+
+      // Reset form
+      setFormData({
+        titleAr: "",
+        titleEr: "",
+        subTitleAr: "",
+        subTitleEr: "",
+        descriptionAr: "",
+        descriptionEr: "",
+        itemType: type,
+      });
+
+      setImages([]);
+      onItemAdded();
+
     } catch (err) {
-      setError("An error occurred. Please try again.");
+      setError(err.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -99,84 +115,61 @@ const ItemForm = ({ type, onItemAdded }) => {
 
       <form onSubmit={handleSubmit}>
         <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="titleAr">{t("dashboard.titleAr")}</label>
-            <input
-              type="text"
-              id="titleAr"
-              name="titleAr"
-              value={formData.titleAr}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="titleEr">{t("dashboard.titleEr")}</label>
-            <input
-              type="text"
-              id="titleEr"
-              name="titleEr"
-              value={formData.titleEr}
-              onChange={handleChange}
-              required
-            />
-          </div>
+          <input
+            type="text"
+            name="titleAr"
+            placeholder="Title Arabic"
+            value={formData.titleAr}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="titleEr"
+            placeholder="Title English"
+            value={formData.titleEr}
+            onChange={handleChange}
+            required
+          />
         </div>
 
         <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="subTitleAr">{t("dashboard.subTitleAr")}</label>
-            <input
-              type="text"
-              id="subTitleAr"
-              name="subTitleAr"
-              value={formData.subTitleAr}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="subTitleEr">{t("dashboard.subTitleEr")}</label>
-            <input
-              type="text"
-              id="subTitleEr"
-              name="subTitleEr"
-              value={formData.subTitleEr}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="descriptionAr">{t("dashboard.descriptionAr")}</label>
-          <textarea
-            id="descriptionAr"
-            name="descriptionAr"
-            value={formData.descriptionAr}
+          <input
+            type="text"
+            name="subTitleAr"
+            placeholder="SubTitle Arabic"
+            value={formData.subTitleAr}
             onChange={handleChange}
-            rows="5"
-            required
+          />
+          <input
+            type="text"
+            name="subTitleEr"
+            placeholder="SubTitle English"
+            value={formData.subTitleEr}
+            onChange={handleChange}
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="descriptionEr">{t("dashboard.descriptionEr")}</label>
-          <textarea
-            id="descriptionEr"
-            name="descriptionEr"
-            value={formData.descriptionEr}
-            onChange={handleChange}
-            rows="5"
-            required
-          />
-        </div>
+        <textarea
+          name="descriptionAr"
+          placeholder="Description Arabic"
+          value={formData.descriptionAr}
+          onChange={handleChange}
+          required
+        />
 
-        <div className="form-group">
-          <label>{t("dashboard.images")}</label>
-          <ImageUpload onImagesChange={handleImageChange} />
-        </div>
+        <textarea
+          name="descriptionEr"
+          placeholder="Description English"
+          value={formData.descriptionEr}
+          onChange={handleChange}
+          required
+        />
+
+        <ImageUpload onImagesChange={handleImageChange} />
 
         <button type="submit" disabled={loading}>
-          {loading ? t("dashboard.loading") : t("dashboard.submit")}
+          {loading ? "Loading..." : "Submit"}
         </button>
       </form>
     </div>
