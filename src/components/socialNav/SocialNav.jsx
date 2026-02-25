@@ -2,9 +2,9 @@ import "./SocialNav.css";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa6";
 import { RiInstagramFill, RiWhatsappFill } from "react-icons/ri";
 import { HiMail } from "react-icons/hi";
+import { IoLogoYoutube } from "react-icons/io";
 import { useTranslation } from "react-i18next";
 import LanguageToggle from "../languageToggle/LanguageToggle";
-import { IoLogoYoutube } from "react-icons/io";
 
 const SocialNav = () => {
   const { t } = useTranslation();
@@ -12,17 +12,14 @@ const SocialNav = () => {
   const phone = "9647750003399";
   const email = "info.fg.iq@gmail.com";
 
-  // WhatsApp message
   const whatsappMessage = t("social.whatsappMessage");
   const whatsappLink = `https://wa.me/${phone}?text=${encodeURIComponent(
     whatsappMessage
   )}`;
 
-  // Email subject and body
   const subject = encodeURIComponent(t("social.emailSubject"));
   const body = encodeURIComponent(t("social.emailBody"));
 
-  // Gmail direct link (الأفضل)
   const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
 
   return (
@@ -30,7 +27,7 @@ const SocialNav = () => {
 
       {/* Facebook */}
       <a
-        href="https://facebook.com"
+        href="https://www.facebook.com/futuregen.iq"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -39,7 +36,7 @@ const SocialNav = () => {
 
       {/* Instagram */}
       <a
-        href="https://instagram.com"
+        href="https://www.instagram.com/future_generation_solar/"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -57,18 +54,20 @@ const SocialNav = () => {
 
       {/* LinkedIn */}
       <a
-        href="https://linkedin.com"
+        href="https://www.linkedin.com/company/future-generation-iq/"
         target="_blank"
         rel="noopener noreferrer"
       >
         <FaLinkedinIn />
       </a>
-       <a
-        href="https://youtube.com"
+
+      {/* YouTube */}
+      <a
+        href="https://www.youtube.com/@FutuerGeneration"
         target="_blank"
         rel="noopener noreferrer"
       >
-       <IoLogoYoutube />
+        <IoLogoYoutube />
       </a>
 
       {/* Gmail */}
@@ -79,8 +78,8 @@ const SocialNav = () => {
       >
         <HiMail />
       </a>
-    <LanguageToggle />
 
+      <LanguageToggle />
     </div>
   );
 };

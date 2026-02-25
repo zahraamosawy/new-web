@@ -10,25 +10,22 @@ const NewsList = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
- useEffect(() => {
-  const fetchNews = async () => {
-    try {
-      const data = await getItems({ type: "news" });
-      setNews(data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching news:", error);
-      setLoading(false);
-    }
-  };
-  
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const data = await getItems({ type: "news" });
+        setNews(data);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchNews();
-}, []);
-
+    fetchNews();
+  }, []);
 
   if (loading) return <div>Loading...</div>;
-
   if (news.length === 0) return <div>No news available</div>;
 
   return (
@@ -36,17 +33,20 @@ const NewsList = () => {
       {news.map((item) => (
         <div className="news-item" key={item.idItem}>
           
-          {/* صورة افتراضية حالياً */}
+          {/* ✅ الصورة */}
           <img
-            src="/placeholder.jpg"
+            src={
+              item.images && item.images.length > 0
+                ? `https://fg.com.iq/uploads/${item.images[0]}`
+                : "/default-news.jpg"
+            }
             alt={i18n.language === "ar" ? item.titleAr : item.titleEr}
+            className="news-image"
           />
 
           <div className="news-text">
             <h3>
-              {i18n.language === "ar"
-                ? item.titleAr
-                : item.titleEr}
+              {i18n.language === "ar" ? item.titleAr : item.titleEr}
             </h3>
 
             <p>
@@ -55,13 +55,9 @@ const NewsList = () => {
                 : item.descriptionEr}
             </p>
 
-            <Link
-              to={`/news/${item.idItem}`}
-              className="details-btn"
-            >
+            <Link to={`/news/${item.idItem}`} className="details-btn">
               {t("newsCenter.more")}
             </Link>
-
           </div>
         </div>
       ))}

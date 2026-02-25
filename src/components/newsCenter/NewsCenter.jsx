@@ -14,7 +14,7 @@ const NewsCenter = () => {
       const data = await getItems({ type: "news", page: 1, limit: 10 });
 
       const filteredNews = data.filter(
-        (item) => normalizeItemType(item.itemType) === "news"
+        (item) => normalizeItemType(item.itemType) === "news",
       );
 
       setNews(filteredNews.slice(0, 4)); // بس 4 أخبار بالهوم
@@ -28,15 +28,14 @@ const NewsCenter = () => {
   return (
     <section className="news-center">
       <h2 className="news-title">
-        <span>{t("newsCenter.titleRed")}</span>{" "}
-        {t("newsCenter.titleBlack")}
+        <span>{t("newsCenter.titleRed")}</span> {t("newsCenter.titleBlack")}
       </h2>
 
       <div className="news-grid">
         {news.map((item) => {
           const imageUrl =
             item.images?.length > 0
-              ? `https://fg.com.iq/api/${item.images[0]}`
+              ? `https://fg.com.iq/uploads/${item.images[0]}`
               : "/placeholder.jpg";
 
           return (
@@ -44,11 +43,7 @@ const NewsCenter = () => {
               <img src={imageUrl} alt={item.titleEr} />
 
               <div className="news-content">
-                <h3>
-                  {i18n.language === "ar"
-                    ? item.titleAr
-                    : item.titleEr}
-                </h3>
+                <h3>{i18n.language === "ar" ? item.titleAr : item.titleEr}</h3>
 
                 <p className="clamp">
                   {i18n.language === "ar"

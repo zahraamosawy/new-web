@@ -2,6 +2,7 @@
   padding: 60px 8%;
   background: #fff;
   font-family: var(--font-en);
+  direction: ltr!important;
 }
 
 /* Breadcrumb */
@@ -16,9 +17,11 @@
 
 /* Title */
 .contact-title {
+
   text-align: center;
   font-size: 36px;
   font-weight: 700;
+  margin: 50px 0;
   margin-bottom: 50px;
 }
 
@@ -86,7 +89,7 @@
   padding: 14px;
   background: rgba(2, 67, 48, 0.8);
 
-  color: #fff;
+  color:var(--color-gold);
   border: none;
   font-size: 16px;
   cursor: pointer;

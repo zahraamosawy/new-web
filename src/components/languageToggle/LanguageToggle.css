@@ -1,48 +1,55 @@
-/* مخفي افتراضيًا (Desktop) */
+/* 1. الحالة العامة: مخفي تماماً في شاشات الكمبيوتر (Desktop) */
 .lang-btn-fixed {
-  display: none;
+  display: none; 
 }
 
-/* حركة الظهور */
-.lang-btn-fixed.fade-in {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
-/* حركة الاختفاء */
-.lang-btn-fixed.fade-out {
-  opacity: 0;
-  transform: scale(0.5) translateY(20px);
-}
-
-
-
-
-
-/* ✅ يظهر في الآيباد والموبايل */
+/* 2. يظهر فقط في التابلت والموبايل (شاشات أقل من 768px) */
 @media (max-width: 768px) {
   .lang-btn-fixed {
     position: fixed;
-    bottom: 10px;
-    /* لجعل العنصر في المنتصف تماماً */
-    left: 80%;
-    transform: translateX(-50%) scale(0.5) translateY(20px);
-    display: flex;
+    bottom: 70px;
+    inset-inline-end: 20px; /* يمين في EN، يسار في AR */
+    
+    display: flex; /* تفعيل الظهور في الموبايل */
     align-items: center;
-    color:var( --color-gold);
-    padding: 12px 16px;
-    border-radius: 40px;
-    border: none;
+    justify-content: center;
+    
+    background-color: var(--color-primary, #154536); 
+    color: var(--color-gold, #d4af37);
+    
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 2px solid var(--color-gold);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    
     cursor: pointer;
-    font-size: 25px;
+    font-size: 18px;
     font-weight: 900;
-    font-family:var(--font-en) ;
-
-    opacity: 0;
-    transform: scale(0.5) translateY(20px);
-
-    transition:
-      opacity 0.5s ease,
-      transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 9999;
+    
+    /* أنيميشن الظهور الافتراضي */
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.3s ease-in-out;
   }
+
+  /* تأثير النقر (Feedback) */
+  .lang-btn-fixed:active {
+    transform: scale(0.85); /* ينكمش قليلاً عند الضغط */
+    background-color: var(--color-gold);
+    color: #fff;
+  }
+}
+
+/* التنسيقات الخاصة بالتحكم عبر JavaScript إذا كنت تستخدمها */
+.lang-btn-fixed.fade-in {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+.lang-btn-fixed.fade-out {
+  opacity: 0 !important;
+  transform: scale(0.5) !important;
+  pointer-events: none;
 }

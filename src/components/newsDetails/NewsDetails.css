@@ -1,123 +1,98 @@
-/* ===============================
-   Layout
-================================= */
-
 .single-news-container {
-  width: 85%;
-  margin: 80px auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 50px;
-  font-family: var(--font-en);
-  direction: ltr !important;
-
-
+  display: flex;
+  flex-direction: column; /* 👈 أهم تعديل */
+  padding: 40px 8%;
+  gap: 40px;
 }
 
-/* ===============================
-   Main Article
-================================= */
-
-.single-news-content h1 {
-  font-size: 32px;
-  margin-bottom: 25px;
-  font-weight: 600;
-  color: #222;
-  font-family: var(--font-en);
-
+.single-news-container.rtl {
+  direction: rtl;
 }
 
-.single-news-content img {
+.single-news-content {
   width: 100%;
-  border-radius: 10px;
-  margin-bottom: 25px;
+}
+
+/* SLIDER */
+.news-slider {
+  margin-bottom: 30px;
+}
+
+.news-slider img {
+  width: 100%;
+  height: 450px;
   object-fit: cover;
+  border-radius: 12px;
 }
 
-.single-news-content p {
-  line-height: 1.9;
-  font-size: 17px;
-  color: #444;
+/* TITLE */
+.single-news-content h1 {
   margin-bottom: 20px;
+  font-size: 32px;
 }
 
-/* ===============================
-   Sidebar
-================================= */
+/* TEXT */
+.single-news-content p {
+  line-height: 1.8;
+  font-size: 18px;
+  color: #555;
+}
 
+/* SIDEBAR (يصير سكشن تحت المقال) */
 .news-sidebar {
-  background: #f5f5f5;
-  padding: 25px;
-  border-radius: 10px;
-  height: fit-content;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+
+  border-top: 1px solid #eee;
+  padding-top: 30px;
 }
 
 .news-sidebar h3 {
-  font-size: 20px;
-  color: red;
   margin-bottom: 25px;
-  font-weight: 600;
+  font-size: 22px;
 }
 
-/* ===============================
-   Recommended Items
-================================= */
-
+/* Recommended grid */
 .recommended-item {
   display: flex;
   gap: 15px;
   margin-bottom: 20px;
-  align-items: center;
 }
 
 .recommended-item img {
-  width: 80px;
-  height: 60px;
-  border-radius: 6px;
+  width: 120px;
+  height: 90px;
   object-fit: cover;
+  border-radius: 8px;
 }
 
-.recommended-item h4 {
+.recommended-info h4 {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.read-more-btn {
   font-size: 14px;
-  margin-bottom: 8px;
-  color: #222;
-}
-
-.recommended-item a {
-  font-size: 13px;
+  color: #007bff;
   text-decoration: none;
-  border: 1px solid red;
-  padding: 6px 12px;
-  border-radius: 5px;
-  color: red;
-  transition: 0.3s;
 }
 
-.recommended-item a:hover {
-  background: red;
-  color: white;
-}
-
-/* ===============================
-   Responsive
-================================= */
-
-@media (max-width: 992px) {
-  .single-news-container {
-    grid-template-columns: 1fr;
+/* Responsive */
+@media (max-width: 768px) {
+  .news-slider img {
+    height: 250px;
   }
 
-  .news-sidebar {
-    margin-top: 40px;
-  }
-}
-
-@media (max-width: 600px) {
   .single-news-content h1 {
-    font-size: 24px;
+    font-size: 22px;
   }
 
-  .single-news-content p {
-    font-size: 15px;
+  .recommended-item {
+    flex-direction: column;
+  }
+
+  .recommended-item img {
+    width: 100%;
+    height: 180px;
   }
 }

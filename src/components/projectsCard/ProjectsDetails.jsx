@@ -1,64 +1,87 @@
 import "./ProjectsDetails.css";
 import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { getItems } from "../api/items";
-import { useTranslation } from "react-i18next";
+import { normalizeItemType } from "../../utils/normalizeItemType.js";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const ProjectDetails = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const { id } = useParams(); // هذا يأخذ القيمة من الرابط /projects/:id
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProject = async () => {
+    const fetchData = async () => {
+      setLoading(true);
       try {
-        const data = await getItems({ page: 1, limit: 100 });
+        // نطلب البيانات من السيرفر
+        const data = await getItems({ type: "project", page: 1, limit: 50 });
 
-        const selected = data.find(
-          (item) => item.idItem.toString() === id
+        const foundProject = data.find(
+          (item) => String(item.idItem) === String(id), // نضمن تحويل الطرفين لنصوص للمقارنة
         );
 
-        setProject(selected);
+        setProject(foundProject);
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching project:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchProject();
+    if (id) fetchData();
   }, [id]);
 
-  if (!project) return <div>Loading...</div>;
+  if (loading) return <h2 className="loading">Loading...</h2>;
+  if (!project) return <h2 className="error">Project not found! (ID: {id})</h2>;
 
-  const imageUrl =
+  const images =
     project.images?.length > 0
-      ? `https://fg.com.iq/api/${project.images[0]}`
-      : "/placeholder.jpg";
+      ? project.images.map((img) => `https://fg.com.iq/uploads/${img}`)
+      : ["/placeholder.jpg"];
 
   return (
     <section className="project-details">
-      <img src={imageUrl} alt={project.titleEr} />
-
-      <div className="project-details-content">
-        <h1>
-          {i18n.language === "ar"
-            ? project.titleAr
-            : project.titleEr}
-        </h1>
-
-        <p>
-          {i18n.language === "ar"
-            ? project.descriptionAr
-            : project.descriptionEr}
-        </p>
-
-        <button
-          className="back-btn"
-          onClick={() => navigate("/projects")}
+      <div className="project-container">
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          navigation
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 4000 }}
+          loop
+          className="details-swiper"
         >
-          ← Back to Projects
-        </button>
+          {images.map((img, index) => (
+            <SwiperSlide key={index}>
+              <img src={img} alt={project.titleAr || "project"} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        <div className="project-details-content">
+          <h1>{i18n.language === "ar" ? project.titleAr : project.titleEr}</h1>
+
+          <div className="description">
+            {i18n.language === "ar"
+              ? project.descriptionAr
+              : project.descriptionEr}
+          </div>
+
+          <button className="back-btn" onClick={() => navigate("/projects")}>
+            {i18n.language === "ar"
+              ? "← العودة للمشاريع"
+              : "← Back to Projects"}
+          </button>
+        </div>
       </div>
     </section>
   );
