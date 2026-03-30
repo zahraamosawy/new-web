@@ -1,11 +1,13 @@
 import React from 'react'
-import Milestones from '../components/milestones/Milestones'
+import VideoBar from '../components/videoBar/VideoBar'
 
 function Services() {
   return (
     <div>
-      <Milestones />
+     
+      <VideoBar />
 
+    
     </div>
     
   )

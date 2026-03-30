@@ -2,10 +2,10 @@ import { useEffect, useState, useRef } from "react";
 import "./StatsSection.css";
 
 const stats = [
-  { value: 15, label: "year+", title: "Experience" },
+  { value: 4, label: "year+", title: "Experience" },
   { value: 10, label: "R&D", title: "Personnel" },
-  { value: 150, label: "product", title: "Specification" },
-  { value: 50, label: "people+", title: "Team Service" },
+  { value: 300, label: "project+", title: "Specification" },
+  { value: 15, label: "people+", title: "Team Service" },
 ];
 
 const StatCard = ({ value, label, title }) => {

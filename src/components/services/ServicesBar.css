@@ -1,0 +1,70 @@
+.services-section {
+  background: #f2f4f3;
+  padding: 100px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.services-container {
+  max-width: 1050px;
+  width: 100%;
+}
+
+/* ===== Title ===== */
+.services-title {
+  font-size: clamp(38px, 6vw, 64px);
+  color: #2e8b57;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+/* ===== List ===== */
+.services-list {
+  list-style: none;
+  padding: 0;
+}
+
+.services-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 20px;
+  line-height: 1.9;
+  margin-bottom: 24px;
+  color: #2c3e3a;
+}
+
+.service-icon {
+  color: #2e8b57;
+  font-size: 22px;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+/* ===== Footer ===== */
+.services-footer {
+  margin-top: 70px;
+  border-top: 2px solid #d4a017;
+  padding-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #2e8b57;
+  font-weight: 600;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-number {
+  font-size: 18px;
+}
+
+/* ===== RTL Support ===== */
+.rtl {
+  direction: rtl;
+  text-align: right;
+}

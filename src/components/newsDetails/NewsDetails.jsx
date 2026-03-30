@@ -1,16 +1,18 @@
-import "./NewsDetails.css";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
 import { getItems } from "../api/items";
 import { normalizeItemType } from "../../utils/normalizeItemType.js";
 
-// Swiper
+// Swiper imports
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+
+// Styles
+import "./NewsDetails.css";
 
 const NewsDetails = () => {
   const { id } = useParams();
@@ -21,112 +23,105 @@ const NewsDetails = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getItems({ type: "news", page: 1, limit: 50 });
+      try {
+        const data = await getItems({ type: "news", page: 1, limit: 50 });
 
-      const newsItems = data.filter(
-        (item) => normalizeItemType(item.itemType) === "news"
-      );
+        const newsItems = data.filter(
+          (item) => normalizeItemType(item.itemType) === "news"
+        );
 
-      const selected = newsItems.find(
-        (item) => item.idItem === Number(id)
-      );
+        const selected = newsItems.find(
+          (item) => item.idItem === Number(id)
+        );
 
-      setArticle(selected);
+        setArticle(selected);
 
-      setRecommended(
-        newsItems
-          .filter((item) => item.idItem !== Number(id))
-          .slice(0, 4)
-      );
+        // جلب أخبار مقترحة (باستثناء الخبر الحالي)
+        setRecommended(
+          newsItems
+            .filter((item) => item.idItem !== Number(id))
+            .slice(0, 4)
+        );
+      } catch (error) {
+        console.error("Error fetching news details:", error);
+      }
     };
 
     fetchData();
+    // العودة لأعلى الصفحة عند تغيير الخبر
+    window.scrollTo(0, 0);
   }, [id]);
 
-  if (!article) return <h2>Loading...</h2>;
+  if (!article) return <h2 className="loading-text">Loading...</h2>;
 
-  const images =
-    article.images?.length > 0
-      ? article.images.map(
-          (img) => `https://fg.com.iq/uploads/${img}`
-        )
-      : ["/placeholder.jpg"];
+  // معالجة مصفوفة الصور
+  const images = article.images?.length > 0
+    ? article.images.map((img) => `https://fg.com.iq/uploads/${img}`)
+    : ["/placeholder.jpg"];
 
   return (
-    <section
-      className={`single-news-container ${
-        i18n.language === "ar" ? "rtl" : ""
-      }`}
-    >
-      {/* MAIN CONTENT */}
+    <section className={`single-news-container ${i18n.language === "ar" ? "rtl" : ""}`}>
+      
       <div className="single-news-content">
-
         {/* IMAGE SLIDER */}
         <div className="news-slider">
           <Swiper
+            key={article.idItem} // لضمان إعادة تهيئة السلايدر عند تغيير الخبر
             modules={[Navigation, Pagination, Autoplay]}
-            navigation
+            navigation={images.length > 1}
             pagination={{ clickable: true }}
-            autoplay={{ delay: 4000 }}
-            loop
+            autoplay={images.length > 1 ? { delay: 4000 } : false}
+            loop={images.length > 1}
+            spaceBetween={10}
+            slidesPerView={1}
           >
             {images.map((img, index) => (
               <SwiperSlide key={index}>
-                <img src={img} alt="news" />
+                <div className="slide-image-wrapper">
+                  <img src={img} alt={`Slide ${index + 1}`} />
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
 
-        {/* TITLE */}
-        <h1>
-          {i18n.language === "ar"
-            ? article.titleAr
-            : article.titleEr}
-        </h1>
-
-        {/* TEXT */}
-        <p>
-          {i18n.language === "ar"
-            ? article.descriptionAr
-            : article.descriptionEr}
-        </p>
-
+        {/* CONTENT TEXT */}
+        <div className="news-body">
+          <h1>
+            {i18n.language === "ar" ? article.titleAr : article.titleEr}
+          </h1>
+          <p className="description-text">
+            {i18n.language === "ar" ? article.descriptionAr : article.descriptionEr}
+          </p>
+        </div>
       </div>
 
-      {/* SIDEBAR */}
+      {/* SIDEBAR - RECOMMENDED NEWS */}
       <aside className="news-sidebar">
         <h3>{t("newsCenter.recommended")}</h3>
-
-        {recommended.map((item) => {
-          const recImage =
-            item.images?.length > 0
+        <div className="recommended-list">
+          {recommended.map((item) => {
+            const recImage = item.images?.length > 0
               ? `https://fg.com.iq/uploads/${item.images[0]}`
               : "/placeholder.jpg";
 
-          return (
-            <div key={item.idItem} className="recommended-item">
-
-              <img src={recImage} alt={item.titleEr} />
-
-              <div className="recommended-info">
-                <h4>
-                  {i18n.language === "ar"
-                    ? item.titleAr
-                    : item.titleEr}
-                </h4>
-
-                <Link
-                  to={`/news/${item.idItem}`}
-                  className="read-more-btn"
-                >
-                  {t("newsCenter.more")}
-                </Link>
+            return (
+              <div key={item.idItem} className="recommended-item">
+                <img src={recImage} alt="recommended" />
+                <div className="recommended-info">
+                  <h4>
+                    {i18n.language === "ar" ? item.titleAr : item.titleEr}
+                  </h4>
+                  <Link to={`/news/${item.idItem}`} className="read-more-link">
+                    {t("newsCenter.more")}
+                  </Link>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </aside>
+
     </section>
   );
 };

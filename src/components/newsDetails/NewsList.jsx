@@ -1,11 +1,12 @@
 import "./NewsList.css";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // أضفنا useNavigate
 import { getItems } from "../api/items";
 
 const NewsList = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate(); // هوك للتنقل البرمجي
 
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,15 +26,27 @@ const NewsList = () => {
     fetchNews();
   }, []);
 
+  // دالة للتعامل مع النقر على الكارد بالكامل
+  const handleCardClick = (id) => {
+    // نتحقق إذا كان عرض الشاشة أصغر من 900px (نفس قيمة الميديا كويري)
+    if (window.innerWidth <= 900) {
+      navigate(`/news/${id}`);
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (news.length === 0) return <div>No news available</div>;
 
   return (
     <section className="news-page">
       {news.map((item) => (
-        <div className="news-item" key={item.idItem}>
+        <div 
+          className="news-item" 
+          key={item.idItem}
+          onClick={() => handleCardClick(item.idItem)} // النقر على الكارد
+          style={{ cursor: window.innerWidth <= 900 ? 'pointer' : 'default' }}
+        >
           
-          {/* ✅ الصورة */}
           <img
             src={
               item.images && item.images.length > 0
@@ -49,7 +62,8 @@ const NewsList = () => {
               {i18n.language === "ar" ? item.titleAr : item.titleEr}
             </h3>
 
-            <p>
+            {/* أضفنا كلاس truncate-text هنا */}
+            <p className="truncate-text">
               {i18n.language === "ar"
                 ? item.descriptionAr
                 : item.descriptionEr}

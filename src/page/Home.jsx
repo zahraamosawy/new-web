@@ -7,7 +7,7 @@ import Sidebar from "../components/sidebar/Sidebar";
 function Home() {
   return (
     <div>
-      <Sidebar />
+        <Sidebar />
 
       <AboutSection />
       <StatsSection />

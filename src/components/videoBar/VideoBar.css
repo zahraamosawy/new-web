@@ -1,0 +1,44 @@
+/* ===== Container ===== */
+
+.container-sidebar {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+@media (min-width: 1600px) {
+  .sidebar {
+    
+    height: 90vh;
+  }
+}
+
+/* ===== Tablet ===== */
+
+@media (max-width: 768px) {
+
+  .sidebar {
+    height: 65vh;
+  }
+
+  
+
+}
+
+/* ===== Mobile ===== */
+
+@media (max-width: 480px) {
+
+  .sidebar {
+    height: 55vh;
+  }
+
+ 
+
+ 
+
+}

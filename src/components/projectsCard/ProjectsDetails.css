@@ -2,8 +2,11 @@
   width: 100%;
 }
 
+
 .details-swiper {
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 500px;
 }
 

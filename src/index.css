@@ -56,7 +56,7 @@ html {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  margin-top: 100px; /* Height of the fixed header */
+  margin-top: 70px; /* Height of the fixed header */
 }
 
 .main-content {

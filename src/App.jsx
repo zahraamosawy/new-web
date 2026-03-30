@@ -29,7 +29,7 @@ function App() {
     <div className="app-layout">
       {/* العناصر الثابتة في أعلى الصفحة */}
       <Header />
-      <NavBar /> 
+    
       <Toaster position="top-center" />
 
       {/* المحتوى الرئيسي المتغير */}
@@ -48,7 +48,7 @@ function App() {
           <Route path="/register" element={<Register />} />
 
           {/* المسارات المحمية (Protected Routes) */}
-          <Route
+         <Route
             path="/dashboard"
             element={
               <ProtectedRoute>

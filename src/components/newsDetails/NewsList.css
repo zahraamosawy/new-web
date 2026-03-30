@@ -70,7 +70,14 @@
   color: #555;
   line-height: 1.8;
   max-width: 620px;
+  /* هذا الجزء المسؤول عن قص النص بعد 3 أسطر مثلاً */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* يمكنك تغيير الرقم لزيادة أو تقليل الأسطر */
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 
 /* =========================
    Button

@@ -1,7 +1,7 @@
 .about-section {
   padding: 10px 5%;
   background: #fff;
-  margin-top: 50px;
+  margin-top: 10px;
   box-shadow: 0 5px 5px #0000001a;
   border-radius: 9px;
   direction: ltr !important;
@@ -34,7 +34,6 @@
   color: var(--color-dark);
   line-height: 1.8;
   margin-bottom: 30px;
-
   max-width: 600px;
 }
 
@@ -44,7 +43,7 @@
   color: var(--color-white);
   padding: 12px 30px;
   margin-top: 20px;
-  border-radius: 8px;
+  border-radius: 15px;
   text-decoration: none;
   font-weight: 500;
   box-shadow: 0 2px 5px var(--color-beige);
